@@ -1,0 +1,40 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #add8e6; /* Light Blue */
+    padding: 20px;
+    text-align: center;
+}
+
+.account-details {
+    background-color: #90ee90; /* Light Green */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.transactions {
+    background-color: #f08080; /* Light Coral */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.button {
+    background-color: #d3d3d3; /* Light Gray */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .header, .account-details, .transactions {
+        padding: 10px;
+        margin: 10px;
+    }
+}
