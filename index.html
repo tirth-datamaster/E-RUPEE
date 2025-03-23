@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Rupee Project</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4a90e2, #50c878); /* Gradient background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+    
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo Section */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(360deg) scale(1.2);
+            filter: brightness(1.2);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-text h1:hover {
+            color: #007bff;
+            transform: scale(1.1);
+        }
+
+        .logo-text p {
+            font-size: 1.2rem;
+            color: #666;
+            transition: color 0.3s ease, letter-spacing 0.3s ease;
+        }
+
+        .logo-text p:hover {
+            color: #007bff;
+            letter-spacing: 1px;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .header:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background-color: #0056b3;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .header h1:hover {
+            transform: scale(1.1);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            transition: color 0.3s ease, letter-spacing 0.3s ease;
+        }
+
+        .header p:hover {
+            color: #ffdd57;
+            letter-spacing: 1px;
+        }
+
+        .update-profile-btn {
+            background-color: #fff;
+            color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .update-profile-btn:hover {
+            background-color: #0056b3;
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 90%;
+            max-width: 400px;
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .modal h2 {
+            margin-bottom: 15px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .modal h2:hover {
+            color: #007bff;
+        }
+
+        .modal label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .modal label:hover {
+            color: #007bff;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modal input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .modal button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .modal button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .modal-close {
+            background-color: #dc3545;
+            margin-left: 10px;
+        }
+
+        .modal-close:hover {
+            background-color: #a71d2a;
+        }
+
+        .account-card,
+        .transfer-box,
+        .receive-box,
+        .recent-transactions {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .account-card:hover,
+        .transfer-box:hover,
+        .receive-box:hover,
+        .recent-transactions:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background-color: #f9f9f9;
+        }
+
+        .account-card h2,
+        .transfer-box h2,
+        .receive-box h2,
+        .recent-transactions h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .account-card h2:hover,
+        .transfer-box h2:hover,
+        .receive-box h2:hover,
+        .recent-transactions h2:hover {
+            color: #007bff;
+        }
+
+        .balance {
+            color: #28a745;
+            font-size: 2.5rem;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .balance:hover {
+            color: #1e7e34;
+            transform: scale(1.1);
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f1f1;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .transaction-item:hover {
+            background-color: #f9f9f9;
+            transform: scale(1.02);
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-item span {
+            font-size: 1rem;
+        }
+
+        .transaction-item .amount {
+            font-weight: bold;
+            color: #28a745;
+            transition: color 0.3s ease;
+        }
+
+        .transaction-item .amount:hover {
+            color: #1e7e34;
+        }
+
+        .transaction-item .amount.negative {
+            color: #dc3545;
+            transition: color 0.3s ease;
+        }
+
+        .transaction-item .amount.negative:hover {
+            color: #a71d2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="e-pay-high-resolution-logo.png" alt="EpayS" class="logo-icon">
+            <div class="logo-text">
+                <h1>e-pay</h1>
+                <p>aapka swagat hai</p>
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Welcome to E-Rupee</h1>
+            <p>Your digital wallet for seamless transactions</p>
+            <button class="update-profile-btn" onclick="openModal()">Update Profile</button>
+        </div>
+
+        <!-- Account Details Section -->
+        <div class="account-card">
+            <h2>Account Details</h2>
+            <p class="balance">₹1,000</p>
+            <p class="acc-number">Account Number: 1234-5678-9012</p>
+        </div>
+
+        <!-- Transfer Money Section -->
+<div class="transfer-box" onclick="toggleBluetoothOption()">
+    <h2>Transfer Money</h2>
+    <p>Click to see transfer options</p>
+    <div class="via-bluetooth" id="bluetooth-option">
+        <label for="bluetooth-port">Select Bluetooth Device:</label>
+        <select id="bluetooth-port">
+            <option value="device1">Device 1 - John’s Phone</option>
+            <option value="device2">Device 2 - Laptop</option>
+            <option value="device3">Device 3 - Speaker</option>
+        </select>
+        <button>Transfer via Bluetooth</button>
+    </div>
+</div>
+
+<!-- Receive Money Section -->
+<div class="receive-box" onclick="toggleReceiveBluetoothOption()">
+    <h2>Receive Money</h2>
+    <p>Click to see receive options</p>
+    <div class="via-bluetooth" id="receive-bluetooth-option">
+        <label for="receive-bluetooth-port">Select Bluetooth Device:</label>
+        <select id="receive-bluetooth-port">
+            <option value="device1">Device 1 - John’s Phone</option>
+            <option value="device2">Device 2 - Laptop</option>
+            <option value="device3">Device 3 - Speaker</option>
+        </select>
+        <button>Receive via Bluetooth</button>
+    </div>
+</div>
+
+<script>
+    // Toggle Bluetooth options for Transfer Money
+    function toggleBluetoothOption() {
+        const bluetoothOption = document.getElementById('bluetooth-option');
+        bluetoothOption.style.display = bluetoothOption.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Toggle Bluetooth options for Receive Money
+    function toggleReceiveBluetoothOption() {
+        const receiveBluetoothOption = document.getElementById('receive-bluetooth-option');
+        receiveBluetoothOption.style.display = receiveBluetoothOption.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+        
+
+        <!-- Recent Transactions Section -->
+        <div class="recent-transactions">
+            <h2>Recent Transactions</h2>
+            <div class="transaction-item">
+                <span>Received via Bluetooth</span>
+                <span class="amount">+₹200.00</span>
+            </div>
+            <div class="transaction-item">
+                <span>Sent to John</span>
+                <span class="amount negative">-₹50.00</span>
+            </div>
+            <div class="transaction-item">
+                <span>Payment to XYZ Services</span>
+                <span class="amount negative">-₹75.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal" id="modal">
+        <h2>Update Profile</h2>
+        <form id="update-profile-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="contact">Contact</label>
+            <input type="text" id="contact" placeholder="Enter your contact number" required>
+
+            <label for="account-number">Account Number</label>
+            <input type="text" id="account-number" placeholder="Enter your account number" required>
+
+            <button type="submit">Save</button>
+            <button type="button" class="modal-close" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        // Open Modal
+        function openModal() {
+            document.getElementById('modal').classList.add('show');
+            document.getElementById('modal-overlay').classList.add('show');
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.getElementById('modal-overlay').classList.remove('show');
+        }
+
+        // Handle Form Submission
+        document.getElementById('update-profile-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const contact = document.getElementById('contact').value;
+            const accountNumber = document.getElementById('account-number').value;
+
+            alert(`Profile Updated:\nName: ${name}\nContact: ${contact}\nAccount Number: ${accountNumber}`);
+            closeModal();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+/* 1. Body with Gradient */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #6f00ff, #3f51b5);
+  /* Adjust gradient colors to your liking */
+  color: #333;
+  display: flex;           /* Center container horizontally & vertically if you want */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;       /* Fill full screen height */
+}
+
+/* 2. Card Container */
+.card-container {
+  width: 350px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  padding: 30px 20px;
+}
+
+/* 3. Avatar */
+.avatar-box {
+  margin-bottom: 10px;
+}
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 4. User Name & Email */
+.user-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.user-email {
+  font-size: 0.95rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* 5. Balance Section */
+.balance-title {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+.balance-amount {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+.account-number {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+/* 6. Buttons */
+.button-group {
+  margin-bottom: 20px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  margin: 5px;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover {
+  filter: brightness(0.9);
+}
+.btn-green { background-color: #4caf50; }
+.btn-purple { background-color: #9c27b0; }
+.btn-blue { background-color: #2196f3; }
+
+/* 7. Linked Cards, Transactions */
+.linked-cards, .transactions {
+  text-align: left;
+  margin: 20px 0;
+}
+.linked-cards h3,
+.transactions h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #444;
+}
+.linked-cards p,
+.transactions ul li {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 4px;
+}
